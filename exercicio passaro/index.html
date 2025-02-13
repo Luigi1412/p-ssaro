@@ -1,0 +1,197 @@
+s<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/phaser@3.55.2/dist/phaser.min.js"></script>
+    <title>Exercício do Pássaro</title>
+    
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;  }
+    </style>
+</head>
+<body>
+
+    <script>
+
+        var config = {
+            type: Phaser.AUTO,
+            width: 800,
+            height: 600,
+    
+            scene: {
+                preload: preload,
+                create: create,
+                update: update
+            }
+        };
+    
+        var game = new Phaser.Game(config);
+
+        var passarinho; //animando o passaro
+
+        var gaivota; // animndo o passaro 2
+        
+    
+        function preload() {
+            this.load.image('bg', 'assets/salvadorBA.jpeg'); // carregando a imagem de fundo 
+            this.load.spritesheet( 'bird', 'assets/bird-purple.png', { frameWidth: 75, frameHeight: 75 }); // carregando o passaro na tela
+            this.load.spritesheet( 'gaivota', 'assets/bird-green.png', { frameWidth: 75, frameHeight: 75 }); // carregndo o passaro 2 na tela
+        }
+    
+        function create() {
+            this.add.image(400, 300, 'bg').setScale(1.2);
+            passarinho = this.add.sprite(100, 300, 'bird').setScale(1.3); 
+            gaivota = this.add.sprite(100, 300, 'gaivota').setScale(0.9);
+
+
+            this.anims.create({
+                key: 'fly',
+                frames: this.anims.generateFrameNumbers( 'bird', { start: 0, end: 7}),
+                frameRate: 10,
+                repeat: -1
+
+
+            })
+            this.anims.create({
+                key: 'fly2',
+                frames: this.anims.generateFrameNumbers( 'gaivota', { start: 0, end: 7}),
+                frameRate: 10,
+                repeat: -1
+            });
+
+            passarinho.anims.play('fly', true);
+            gaivota.anims.play('fly2', true);
+        }
+    
+        function update() {
+
+            if (passarinho.x === 100) {
+                passarinho.setFlip(false, false);
+                passarinho.ida = true;    
+            }
+
+            if (passarinho.x < 700 && passarinho.ida === true) {
+                console.log('o que acontece?');
+                passarinho.x +=5;
+            }
+
+            if (passarinho.x === 700) {
+                passarinho.setFlip(true, false);
+                passarinho.ida = false;
+            }
+            
+            if (passarinho.x > 100  && passarinho.ida === false) {
+                console.log('é o que aconteceu agora?');
+                passarinho.x -= 5;
+            }
+
+            if (passarinho.y > 100 && passarinho.sobe === true) {
+                passarinho.y -= 10; // faz o passarinho subir
+                console.log("passarinho sobe"); 
+            }
+
+            if (passarinho.y === 100) { // faz o  passaro descer 
+                passarinho.sobe = false;
+            }
+    
+            if (passarinho.y < 500) { // faz o passaro descer
+                passarinho.y += 5;
+                console.log("passarinho desce");
+            }
+
+            if (passarinho.y === 500) { // faz o passaro subir
+                passarinho.sobe = true;
+            }
+
+            if (gaivota.y > 100 && gaivota.sobe === true) {
+                gaivota.y -= 10; // faz o passarinho subir
+                console.log("gaivota sobe"); 
+            }
+
+            if (gaivota.y === 100) { // faz o  passaro descer 
+                gaivota.sobe = false;
+            }
+            
+            if (gaivota.y < 500) { // faz o passaro descer
+                gaivota.y += 5;
+                console.log("passarinho desce");
+            }
+
+            if (gaivota.y === 500) { // faz o passaro subir
+                gaivota.sobe = true;
+            }
+
+            if (gaivota.x === 100) {
+                gaivota.setFlip(false, false);
+                gaivota.ida = true;    
+            }
+
+            if (gaivota.x < 700 && gaivota.ida === true) {
+                console.log('o que acontece?');
+                gaivota.x +=5;
+            }
+
+            if (gaivota.x === 700) {
+                gaivota.ida = false;
+            }
+            
+            if (gaivota.x > 100  && gaivota.ida === false) {
+                console.log('é o que aconteceu agora?');
+                gaivota.setFlip(true, false);
+                gaivota.x -= 5;
+
+            }
+
+            if (gaivota.y > 100 && gaivota.sobe === true) {
+                gaivota.y -= 10; // faz o passarinho subir
+                console.log("gaivota sobe"); 
+            }
+
+            if (gaivota.y === 100) { // faz o  passaro descer 
+                gaivota.sobe = false;
+            }
+            
+            if (gaivota.y < 500) { // faz o passaro descer
+                gaivota.y += 5;
+                console.log("passarinho desce");
+            }
+
+            if (gaivota.y === 500) { // faz o passaro subir
+                gaivota.sobe = true;
+            }
+
+            if (gaivota.x === 100) {
+                gaivota.setFlip(false, false);
+                gaivota.ida = true;    
+            }
+
+            if (gaivota.x < 700 && gaivota.ida === true) {
+                console.log('o que acontece?');
+                gaivota.x +=10;
+            }
+
+            if (gaivota.x === 700) {
+                gaivota.ida = false;
+            }
+            
+            if (gaivota.x > 100  && gaivota.ida === false) {
+                console.log('é o que aconteceu agora?');
+                gaivota.setFlip(true, false);
+                gaivota.x -= 10;
+
+            }
+
+        }
+
+</script>
+</script>
+</html>         
+</script>
+</body>
+</html>
